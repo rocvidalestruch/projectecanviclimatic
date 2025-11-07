@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../styles/css/home.css">
+    <script src="../../src/js/home.js" defer></script>
 </head>
 
 <body>
@@ -94,38 +95,94 @@
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="container">
-
             <h3 class="text-center mb-5" style="font-size: 2.2rem; font-weight: 700;">El repte en xifres</h3>
             <div class="row g-4">
+                <!-- Tarjeta 1 -->
                 <div class="col-md-3 col-sm-6">
-                    <div class="stat-card">
-                        <a href="./AugmentTemperatura.html" style="color: aliceblue;">
-                            <span class="stat-number">+1,1 °C</span>
-                            <span class="stat-label">Augment de temperatura global</span>
-                        </a>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <!-- Cara frontal -->
+                            <div class="flip-card-front">
+                                <span class="stat-number">+1,1 °C</span>
+                                <span class="stat-label">Augment de temperatura global</span>
+                            </div>
+                            <!-- Cara trasera -->
+                            <div class="flip-card-back">
+                                <h4><i class="bi bi-thermometer-high"></i> Temperatura Global</h4>
+                                <p>L'augment de 1,1°C respecte a nivells preindustrials ja està causant efectes
+                                    devastadors: ones de calor extremes, sequeres prolongades i alteració dels
+                                    ecosistemes.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Tarjeta 2 -->
                 <div class="col-md-3 col-sm-6">
-                    <div class="stat-card">
-                        <span class="stat-number">419 ppm</span>
-                        <span class="stat-label">CO₂ a l'atmosfera (màxim històric)</span>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="stat-number">419 ppm</span>
+                                <span class="stat-label">CO₂ a l'atmosfera (màxim històric)</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4><i class="bi bi-cloud-fill"></i> CO₂ Atmosfèric</h4>
+                                <p>El nivell de CO₂ ha superat els 419 ppm, el més alt en 3 milions d'anys. Aquest gas
+                                    d'efecte hivernacle és el principal causant del canvi climàtic actual.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Tarjeta 3 -->
                 <div class="col-md-3 col-sm-6">
-                    <div class="stat-card">
-                        <span class="stat-number">258M</span>
-                        <span class="stat-label">Persones afectades anualment</span>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="stat-number">258M</span>
+                                <span class="stat-label">Persones afectades anualment</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4><i class="bi bi-people-fill"></i> Impacte Humà</h4>
+                                <p>Cada any, 258 milions de persones pateixen les conseqüències directes del canvi
+                                    climàtic: inundacions, sequeres, pèrdua de collites i desplaçament forçat.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Tarjeta 4 -->
                 <div class="col-md-3 col-sm-6">
-                    <div class="stat-card">
-                        <span class="stat-number">67%</span>
-                        <span class="stat-label">Reducció d'emissions necessària per 2030</span>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="stat-number">67%</span>
+                                <span class="stat-label">Reducció d'emissions necessària per 2030</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4><i class="bi bi-graph-down-arrow"></i> Objectiu 2030</h4>
+                                <p>Per limitar l'escalfament a 1,5°C, necessitem reduir les emissions globals un 67%
+                                    abans del 2030. És un repte ambiciós però assolible amb voluntat política.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <p class="click-hint">
+                <i class="bi bi-hand-index"></i> Apropa el ratolí per veure més informació
+            </p>
         </div>
     </section>
+
+    <script>
+
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function () {
+                this.classList.toggle('flipped');
+            });
+        });
+    </script>
 
     <!-- About Section -->
     <section class="about-section">
@@ -146,39 +203,15 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <div class="col-lg-4 mb-4">
-                    <div class="feature-box">
-                        <h4><i class="bi bi-lightning-charge-fill"></i> La nostra proposta</h4>
-                        <p>Combinem rigor científic amb pedagogia innovadora. Vídeos explicatius, podcasts amb experts,
-                            infografies interactives i activitats pràctiques que desglossen les causes del canvi
-                            climàtic i exploren solucions basades en evidència.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="feature-box">
-                        <h4><i class="bi bi-cpu-fill"></i> Tecnologia intel·ligent</h4>
-                        <p>Incorporem intel·ligència artificial per generar resúmens personalitzats, transcriure
-                            podcasts automàticament i facilitar l'avaluació de projectes. Tot dissenyat amb
-                            accessibilitat universal (WCAG).</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="feature-box">
-                        <h4><i class="bi bi-hand-thumbs-up-fill"></i> Acció real</h4>
-                        <p>No ens quedem en la teoria: oferim espais per a l'acció amb exercicis de classificació de
-                            mesures segons el seu impacte, projectes col·laboratius avaluables i espai per presentar
-                            treballs.</p>
-                    </div>
-                </div>
-            </div>
+
+        </div>
         </div>
     </section>
 
     <!-- Target Audience Section -->
     <section class="audience-section">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Per a qui?</h2>
+            <h2 class="section-title text-center mb-5">Per a qui es la web?</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="audience-card">
