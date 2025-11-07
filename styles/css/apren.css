@@ -1,0 +1,16 @@
+body {
+  background-color: #eef6f9;
+}
+
+canvas {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #b3e6ff 0%, #006994 100%);
+  display: block;
+  margin: 20px auto;
+}
+
+.slider-container {
+  text-align: center;
+  margin-top: 20px;
+}

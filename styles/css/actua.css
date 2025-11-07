@@ -1,0 +1,67 @@
+body {
+  background-color: #f6f9f6;
+}
+
+.bins {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.bin {
+  width: 100px;
+  height: 140px;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#plastic {
+  background-color: #ffcc00;
+}
+
+#cartro {
+  background-color: #d2691e;
+}
+
+#vidre {
+  background-color: #2e8b57;
+}
+
+#organic {
+  background-color: #8b4513;
+}
+
+#residuos {
+  background-color: #808080;
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.item {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 60px;
+  cursor: grab;
+  user-select: none;
+  font-size: 30px;
+}
+
+.success {
+  border: 3px solid green !important;
+}
