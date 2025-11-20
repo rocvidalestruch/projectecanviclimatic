@@ -1,43 +1,44 @@
-const canvas = document.getElementById("iceCanvas");
-const ctx = canvas.getContext("2d");
-const timeRange = document.getElementById("timeRange");
-const yearLabel = document.getElementById("yearLabel");
+const yearInput = document.getElementById("yearInput");
+const heatOverlay = document.getElementById("heatOverlay");
+const mapContainer = document.querySelector(".map-container");
 
-function drawScene(percentage) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+const startYear = 2025;
+const endYear = 2075;
 
-  // Mar
-  ctx.fillStyle = "#006994";
-  ctx.fillRect(0, 200, 600, 100);
+function updateHeatEffect(year) {
+  // Limita el año dentro del rango
+  year = Math.min(Math.max(year, startYear), endYear);
 
-  // Cielo
-  const skyGradient = ctx.createLinearGradient(0, 0, 0, 200);
-  skyGradient.addColorStop(0, "#b3e6ff");
-  skyGradient.addColorStop(1, "#ffffff");
-  ctx.fillStyle = skyGradient;
-  ctx.fillRect(0, 0, 600, 200);
+  // Calcula progreso (0 a 1)
+  const progress = (year - startYear) / (endYear - startYear);
 
-  // Hielo (se derrite con el tiempo)
-  const iceHeight = 100 - percentage;
-  ctx.fillStyle = "#e0f7ff";
-  ctx.beginPath();
-  ctx.moveTo(100, 200);
-  ctx.lineTo(100, 200 - iceHeight);
-  ctx.lineTo(500, 200 - iceHeight);
-  ctx.lineTo(500, 200);
-  ctx.closePath();
-  ctx.fill();
+  // Escala de intensitat (més vermell a mesura que augmenta el temps)
+  const redIntensity = Math.min(1, progress * 1.2); // fins a 120%
+  const saturationBoost = 1 + progress * 1.5; // augment real de saturació
+  const warmth = progress * 30; // rotació càlida del to
 
-  // Texto informativo
-  ctx.fillStyle = "#003366";
-  ctx.font = "16px Arial";
-  ctx.fillText(`Deshielo: ${Math.round(percentage)}%`, 250, 280);
+  // Aplica filtre CSS potent
+  mapContainer.style.filter = `
+    brightness(${1 - progress * 0.15})
+    saturate(${saturationBoost})
+    sepia(${redIntensity})
+    hue-rotate(${warmth}deg)
+    contrast(${1 + progress * 0.3})
+  `;
+
+  // Afegeix una capa vermellosa visible a sobre (augmentant opacitat)
+  heatOverlay.style.background = `rgba(255, 80, 0, ${0.2 + progress * 0.4})`;
+
+  // Petit efecte de zoom (com escalfament físic)
+  const scale = 1 + progress * 0.25;
+  mapContainer.style.transform = `scale(${scale})`;
 }
 
-timeRange.addEventListener("input", (e) => {
-  const value = parseInt(e.target.value);
-  drawScene(value);
-  yearLabel.textContent = 2025 + Math.round(value / 2); // simula avance temporal
+// Actualitza quan s'introdueix un nou any
+yearInput.addEventListener("input", (e) => {
+  const year = parseInt(e.target.value);
+  updateHeatEffect(year);
 });
 
-drawScene(0);
+// Estat inicial
+updateHeatEffect(2025);

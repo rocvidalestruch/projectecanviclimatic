@@ -1,16 +1,52 @@
 body {
   background-color: #eef6f9;
+  font-family: "Segoe UI", sans-serif;
 }
 
-canvas {
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background: linear-gradient(to bottom, #b3e6ff 0%, #006994 100%);
-  display: block;
-  margin: 20px auto;
-}
-
-.slider-container {
-  text-align: center;
+/* Contenedor general */
+.map-wrapper {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
+}
+
+/* Contenedor del mapa */
+.map-container {
+  position: relative;
+  width: 25%; /* ocupa una cuarta parte */
+  min-width: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.5s ease, filter 0.8s ease;
+}
+
+.map-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Capa de calor adicional */
+.heat-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: rgba(255, 0, 0, 0);
+  pointer-events: none;
+  transition: background 0.8s ease;
+}
+
+.input-container {
+  margin-top: 25px;
+}
+
+/* Responsiu */
+@media (max-width: 768px) {
+  .map-container {
+    width: 60%;
+  }
 }
