@@ -28,8 +28,32 @@ items.forEach(item => {
   });
 });
 
+// Check for previous game completion
+if (localStorage.getItem("gameCompleted") === "true") {
+  const completionMsg = document.createElement("p");
+  completionMsg.textContent = "🏆 Ja has completat el joc anteriorment! Segueix així!";
+  completionMsg.style.color = "gold";
+  completionMsg.style.fontWeight = "bold";
+  message.parentNode.insertBefore(completionMsg, message);
+}
+
+// Restore game state from sessionStorage
+const savedState = JSON.parse(sessionStorage.getItem("gameState"));
+if (savedState) {
+  correctCount = savedState.correctCount || 0;
+  if (savedState.recycledItems) {
+    savedState.recycledItems.forEach(type => {
+      // Find the first item of this type that hasn't been recycled yet
+      const itemToRemove = Array.from(items).find(i => i.dataset.type === type && document.body.contains(i));
+      if (itemToRemove) itemToRemove.remove();
+    });
+  }
+}
+
 bins.forEach(bin => {
   bin.addEventListener("dragover", e => e.preventDefault());
+
+
   bin.addEventListener("drop", e => {
     e.preventDefault();
     const type = e.dataTransfer.getData("type");
@@ -42,6 +66,15 @@ bins.forEach(bin => {
       if (draggedItem) {
         draggedItem.remove();
       }
+
+      // Save state to sessionStorage
+      const currentRecycled = JSON.parse(sessionStorage.getItem("gameState") || '{"recycledItems":[]}').recycledItems || [];
+      currentRecycled.push(type);
+      sessionStorage.setItem("gameState", JSON.stringify({
+        correctCount: correctCount,
+        recycledItems: currentRecycled
+      }));
+
     } else {
       message.textContent = "Ups, aquest no és el contenidor correcte.";
       message.style.color = "red";
@@ -50,6 +83,11 @@ bins.forEach(bin => {
     if (correctCount === 5) {
       message.textContent = "🎉 Has reciclat tot correctament!";
       message.style.color = "green";
+
+      // Save completion to localStorage
+      localStorage.setItem("gameCompleted", "true");
+      // Clear session progress as game is done
+      sessionStorage.removeItem("gameState");
     }
   });
 });

@@ -1,97 +1,95 @@
-const yearInput = document.getElementById("yearInput");
-const mapContainer = document.querySelector(".map-container");
-const img = document.getElementById("worldMap");
-const canvas = document.getElementById("heatCanvas");
+const canvas = document.getElementById("cityCanvas");
 const ctx = canvas.getContext("2d");
 
-const startYear = 2025;
-const endYear = 2075;
+const groundY = 300; // adaptat a canvas 800x400
 
-// Wait for image to load before initializing canvas
-img.onload = () => {
-  canvas.width = img.width;
-  canvas.height = img.height;
-  updateHeatEffect(parseInt(yearInput.value));
-};
+let pollutionLevel = 0; // 0 a 1
 
-function updateHeatEffect(year) {
-  // Limita l'any
-  year = Math.min(Math.max(year, startYear), endYear);
-  const progress = (year - startYear) / (endYear - startYear);
+/* =========================
+   FONS (CEL + CONTAMINACIÓ)
+   ========================= */
+function drawBackground() {
+  const baseBlue = 200;
 
-  // Dibuixa la imatge base
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const value = Math.max(
+    120,
+    baseBlue - pollutionLevel * 80
+  );
 
-  try {
-    // Obté les dades dels píxels (bitmap)
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-
-    // Manipulació directa del canal R (RGB)
-    // Com més progressió, més es suma al canal vermell
-    const addedRed = progress * 100; // Sumar fins a 100 punts de vermell
-
-    for (let i = 0; i < data.length; i += 4) {
-      // data[i] és Vermell (Red)
-      // data[i+1] és Verd (Green)
-      // data[i+2] és Blau (Blue)
-
-      // Augmentem el vermell directament
-      data[i] = Math.min(255, data[i] + addedRed);
-
-      // Opcionalment reduïm una mica els altres per fer el vermell més evident
-      // però mantenint la imatge recognoscible
-      if (progress > 0) {
-        data[i + 1] = Math.max(0, data[i + 1] - (progress * 30));
-        data[i + 2] = Math.max(0, data[i + 2] - (progress * 30));
-      }
-    }
-
-    // Posa les dades modificades de nou al canvas
-    ctx.putImageData(imageData, 0, 0);
-
-    // Assegura que el canvas es veu i la imatge no
-    canvas.style.display = "block";
-    img.style.display = "none";
-
-    // Petit efecte de zoom al canvas
-    const scale = 1 + progress * 0.1;
-    canvas.style.transform = `scale(${scale})`;
-    canvas.style.transition = "transform 0.3s ease";
-
-  } catch (e) {
-    // Fallback: Si falla per CORS (file://), fem servir filtres CSS a la imatge original
-    console.warn("No s'ha pogut accedir al Bitmap (CORS). Usant fallback CSS.");
-    console.error(e);
-    alert("Nota: Si estàs obrint això com a arxiu local, el navegador bloqueja la manipulació de píxels per seguretat (CORS). S'aplicarà un filtre visual alternatiu.");
-
-    canvas.style.display = "none";
-    img.style.display = "block";
-
-    const redIntensity = Math.min(1, progress * 1.2);
-    const saturationBoost = 1 + progress * 1.5;
-    const warmth = progress * 30;
-
-    mapContainer.style.filter = `
-      brightness(${1 - progress * 0.15})
-      saturate(${saturationBoost})
-      sepia(${redIntensity})
-      hue-rotate(${warmth}deg)
-      contrast(${1 + progress * 0.3})
-    `;
-
-    const scale = 1 + progress * 0.25;
-    mapContainer.style.transform = `scale(${scale})`;
-  }
+  ctx.fillStyle = `rgb(${value}, ${value}, ${value})`;
+  ctx.fillRect(0, 0, canvas.width, groundY);
 }
 
-yearInput.addEventListener("input", (e) => {
-  updateHeatEffect(parseInt(e.target.value));
+/* =========================
+   EDIFICIS FIXOS
+   ========================= */
+function drawBuildings() {
+  ctx.fillStyle = "#3a3a3a";
+
+  const buildings = [
+    { x: 40, w: 60, h: 120 },
+    { x: 120, w: 50, h: 160 },
+    { x: 190, w: 70, h: 140 },
+    { x: 280, w: 60, h: 180 },
+    { x: 360, w: 50, h: 130 },
+    { x: 430, w: 80, h: 150 },
+    { x: 560, w: 60, h: 170 },
+    { x: 640, w: 50, h: 140 },
+    { x: 700, w: 70, h: 160 }
+  ];
+
+  buildings.forEach(b => {
+    ctx.fillRect(b.x, groundY - b.h, b.w, b.h);
+  });
+}
+
+/* =========================
+   SKYLINE BARCELONA
+   ========================= */
+function drawScene() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Cel
+  drawBackground();
+
+  // Terra
+  ctx.fillStyle = "#2c2c2c";
+  ctx.fillRect(0, groundY, canvas.width, canvas.height);
+
+  // Edificis
+  drawBuildings();
+
+  /* TORRE GLÒRIES */
+  ctx.fillStyle = "#4a6fa5";
+  ctx.beginPath();
+  ctx.ellipse(610, groundY - 120, 28, 110, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  /* SAGRADA FAMÍLIA */
+  ctx.fillStyle = "#6b5b3e";
+
+  for (let i = 0; i < 4; i++) {
+    ctx.fillRect(380 + i * 18, groundY - 170, 10, 170);
+  }
+
+  ctx.fillRect(360, groundY - 110, 90, 110);
+
+  ctx.beginPath();
+  ctx.moveTo(366, groundY - 170);
+  ctx.lineTo(376, groundY - 190);
+  ctx.lineTo(386, groundY - 170);
+  ctx.fill();
+}
+
+/* =========================
+   SLIDER CONTAMINACIÓ
+   ========================= */
+const slider = document.getElementById("pollutionSlider");
+
+slider.addEventListener("input", (e) => {
+  pollutionLevel = e.target.value / 100;
+  drawScene();
 });
 
-// Força càrrega si la imatge ja està a la cache
-if (img.complete) {
-  canvas.width = img.width;
-  canvas.height = img.height;
-  updateHeatEffect(2025);
-}
+// Dibuix inicial
+drawScene();

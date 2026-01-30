@@ -4,74 +4,165 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Barcelona se calienta: Aprende</title>
+  <title>Barcelona s’escalfa: Aprèn</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/apren.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/css/home.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .skyline-container {
+      width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto 15px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    body {
+      background-color: #f5f9f6;
+    }
+
+    /* Header styling handled by home.css mostly, but keeping local overrides if any */
+    .main-header {
+      background-color: #2c7a7b;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 6rem 2rem;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    footer {
+      background-color: #2c7a7b;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 
 <body>
-  <main class="container my-5 text-center">
-    <h2 class="section-title">Aprende</h2>
-    <p class="mb-4">Conocer los problemas ambientales de Barcelona es el primer paso para entender cómo nos afectan y
-      qué podemos mejorar.</p>
-
-    <div class="learn">
-      <h4>🌊 Agua</h4>
-      <p><strong>Aprende:</strong> Barcelona enfrenta una presión creciente sobre sus reservas de agua debido a las
-        sequías más frecuentes y el aumento de consumo. Gran parte del agua potable se pierde en infraestructuras
-        antiguas y el uso excesivo en el hogar o el riego de jardines agrava el problema.</p>
+  <!-- Header con título principal -->
+  <header class="main-header">
+    <div class="container">
+      <h1>Acció Climàtica — Aprèn i Actua</h1>
+      <p>Educació per a un futur sostenible</p>
     </div>
 
-    <div class="learn">
-      <h4>♻️ Basura y residuos</h4>
-      <p><strong>Aprende:</strong> La acumulación de residuos en el suelo y los errores en la separación afectan al
-        reciclaje y contaminan el entorno. Muchos residuos acaban en vertederos o en el mar Mediterráneo, afectando la
-        biodiversidad local.</p>
-    </div>
+    <!-- Aquí va tu menú de navegación -->
 
-    <div class="learn">
-      <h4>⚡ Energía</h4>
-      <p><strong>Aprende:</strong> El consumo energético de los hogares y comercios aumenta en los meses cálidos,
-        especialmente por el uso de aire acondicionado. Esto incrementa las emisiones de CO₂ y la demanda eléctrica en
-        horas punta.</p>
-    </div>
+    <div class="btn-group my-3" role="group">
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Inici
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="home.html">Portada</a></li>
+          <li><a class="dropdown-item" href="#">Missió</a></li>
+          <li><a class="dropdown-item" href="./sobre.html">Sobre el projecte</a></li>
+        </ul>
+      </div>
 
-    <div class="learn">
-      <h4>🌳 Espacios verdes y biodiversidad</h4>
-      <p><strong>Aprende:</strong> Las zonas verdes urbanas reducen el calor, filtran el aire y mejoran la salud mental,
-        pero están bajo presión por la urbanización y la falta de mantenimiento. Cada árbol cuenta como refugio
-        climático.</p>
-    </div>
+      <spacer style="width: 50px;"></spacer>
 
-    <div class="learn">
-      <h4>🚶 Movilidad</h4>
-      <p><strong>Aprende:</strong> El tráfico es una de las principales fuentes de contaminación en Barcelona. Los
-        vehículos privados emiten gases que agravan el efecto invernadero y la mala calidad del aire afecta la salud
-        pública.</p>
-    </div>
-    <p>Introduce un año entre <strong>2025</strong> y <strong>2075</strong> para ver cómo se intensifica el calor
-      global.</p>
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Projectes
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Energies renovables</a></li>
+          <li><a class="dropdown-item" href="#">Reciclatge</a></li>
+        </ul>
+      </div>
 
-    <div class="map-wrapper">
-      <div class="map-container">
-        <img id="worldMap" src="../../img/world-heatmap.png" alt="Mapa de calor del mundo" style="display: none;">
-        <canvas id="heatCanvas"></canvas>
+      <spacer style="width: 50px;"></spacer>
+
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Accions
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="./apren.html">Aprèn</a></li>
+          <li><a class="dropdown-item" href="./actua.html">Actua</a></li>
+        </ul>
       </div>
     </div>
+  </header>
+  <main class="container my-5 text-center">
+    <h2 class="section-title">Aprèn</h2>
+    <p class="mb-4">Conèixer els problemes ambientals de Barcelona és el primer pas per entendre com ens afecten i què
+      podem millorar.</p>
 
-    <div class="input-container mt-4">
-      <label for="yearInput">Año:</label>
-      <input type="number" id="yearInput" min="2025" max="2075" value="2025"
-        class="form-control d-inline-block w-auto text-center">
+    <div class="learn">
+      <h4>🌊 Aigua</h4>
+      <p><strong>Aprèn:</strong> Barcelona afronta una pressió creixent sobre les seves reserves d’aigua a causa de les
+        sequeres més freqüents i l’increment del consum. Gran part de l’aigua potable es perd en infraestructures
+        antigues i l’ús excessiu a la llar o el reg de jardins empitjora el problema.</p>
     </div>
-  </main>
 
-  <footer class="text-center mt-5">
-    <a href="actua.html" class="btn btn-success">Ir a Actúa →</a>
-    <p class="mt-3">© 2025 | Especial Clima — Barcelona se calienta | Aprende</p>
-  </footer>
+    <div class="learn">
+      <h4>♻️ Escombraries i residus</h4>
+      <p><strong>Aprèn:</strong> L’acumulació de residus al sòl i els errors en la separació afecten el reciclatge i
+        contaminen l’entorn. Molts residus acaben en abocadors o al mar Mediterrani, afectant la biodiversitat local.
+      </p>
+    </div>
 
-  <script src="js/apren.js"></script>
+    <div class="learn">
+      <h4>⚡ Energia</h4>
+      <p><strong>Aprèn:</strong> El consum energètic de les llars i comerços augmenta durant els mesos calorosos,
+        especialment per l’ús de l’aire condicionat. Això incrementa les emissions de CO₂ i la demanda elèctrica en
+        hores
+        punta.</p>
+    </div>
+
+    <div class="learn">
+      <h4>🌳 Espais verds i biodiversitat</h4>
+      <p><strong>Aprèn:</strong> Les zones verdes urbanes redueixen la calor, filtren l’aire i milloren la salut
+        mental, però estan sota pressió per la urbanització i la manca de manteniment. Cada arbre compta com a refugi
+        climàtic.</p>
+    </div>
+
+    <div class="learn">
+      <h4>🚶 Mobilitat</h4>
+      <p><strong>Aprèn:</strong> El trànsit és una de les principals fonts de contaminació a Barcelona. Els vehicles
+        privats emeten gasos que agreugen l’efecte hivernacle i la mala qualitat de l’aire afecta la salut pública.</p>
+    </div>
+
+    <div class="skyline-container">
+      <h2>Contaminació a Barcelona</h2>
+
+      <canvas id="skyline" width="500" height="220"></canvas>
+
+      <button id="pollutionBtn">Inicia la contaminació</button>
+    </div>
+
+    <script src="skyline.js"></script>
+
+
+
+    <script src="js/apren.js"></script>
 </body>
 
 </html>
