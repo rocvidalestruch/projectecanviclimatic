@@ -59,31 +59,44 @@
     </div>
   </header>
   <main class="container my-5 text-center">
-    <h2 class="section-title">Actua: Separa correctament els residus</h2>
-    <p>Arrossega cada residu al contenidor adequat. Cada gest compta!</p>
+    <!-- Pollution Ranking Game Section -->
+    <div class="ranking-section" style="margin-top: 0; border-top: none;">
+      <h2 class="section-title mt-4">Joc: Ordena la Contaminació</h2>
+      <p>Ordena les següents activitats de <strong>MÉS (1)</strong> a <strong>MENYS (6)</strong> contaminant.</p>
 
-    <div class="items">
-      <div class="item" draggable="true" data-type="plastic"><img src="../../img/plastic.jpg" alt="Plàstic"
-          class="item-img"></div>
-      <div class="item" draggable="true" data-type="cartro"><img src="../../img/paper.jpg" alt="Cartró"
-          class="item-img"></div>
-      <div class="item" draggable="true" data-type="vidre"><img src="../../img/vidre.jpg" alt="Vidre" class="item-img">
+      <div class="ranking-container">
+        <!-- Source Items (Activitats desordenades) -->
+        <div class="source-items" id="sourceContainer">
+          <!-- Items will be injected by JS -->
+        </div>
+
+        <!-- Target Slots (1 to 6) -->
+        <div class="target-slots">
+          <div class="rank-slot" data-rank="1">
+            <span class="rank-number">1</span>
+          </div>
+          <div class="rank-slot" data-rank="2">
+            <span class="rank-number">2</span>
+          </div>
+          <div class="rank-slot" data-rank="3">
+            <span class="rank-number">3</span>
+          </div>
+          <div class="rank-slot" data-rank="4">
+            <span class="rank-number">4</span>
+          </div>
+          <div class="rank-slot" data-rank="5">
+            <span class="rank-number">5</span>
+          </div>
+          <div class="rank-slot" data-rank="6">
+            <span class="rank-number">6</span>
+          </div>
+        </div>
+
+        <div id="rankingMessage"></div>
+        <button id="resetRankingBtn" class="btn btn-outline-secondary mt-3" style="display:none;">Tornar a
+          jugar</button>
       </div>
-      <div class="item" draggable="true" data-type="organic"><img src="../../img/organic.jpg" alt="Orgànic"
-          class="item-img"></div>
-      <div class="item" draggable="true" data-type="residuos"><img src="../../img/rebuig.jpg" alt="Rebuig"
-          class="item-img"></div>
     </div>
-
-    <div class="bins mt-5">
-      <div class="bin" id="plastic">Plàstic</div>
-      <div class="bin" id="cartro">Cartró</div>
-      <div class="bin" id="vidre">Vidre</div>
-      <div class="bin" id="organic">Orgànic</div>
-      <div class="bin" id="residuos">Rebuig</div>
-    </div>
-
-    <div id="message" class="mt-4 fw-bold"></div>
   </main>
 
 

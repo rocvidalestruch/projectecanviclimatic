@@ -2,77 +2,95 @@ body {
   background-color: #f6f9f6;
 }
 
-.bins {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 30px;
+/* Pollution Ranking Game Styles */
+.ranking-section {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 2px solid #ccc;
 }
 
-.bin {
-  width: 100px;
-  height: 140px;
-  border-radius: 10px;
-  color: white;
+.ranking-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  gap: 20px;
 }
 
-#plastic {
-  background-color: #ffcc00;
-}
-
-#cartro {
-  background-color: #391ed2;
-}
-
-#vidre {
-  background-color: #2e8b57;
-}
-
-#organic {
-  background-color: #8b4513;
-}
-
-#residuos {
-  background-color: #808080;
-}
-
-.items {
+.source-items {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
-  margin-top: 30px;
+  min-height: 100px;
+  margin-bottom: 20px;
 }
 
-.item {
-  width: 60px;
-  height: 60px;
+.rank-item {
+  width: 150px;
+  padding: 10px;
   background-color: white;
-  border: 2px solid #ccc;
+  border: 2px solid #2c7a7b;
   border-radius: 8px;
-  display: flex;
-  /* Changed to flex for better centering if needed, though img fills it */
-  align-items: center;
-  justify-content: center;
   cursor: grab;
+  text-align: center;
+  font-size: 0.9em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   user-select: none;
-  overflow: hidden;
-  /* Ensure image stays within border-radius */
 }
 
-.item img {
+.rank-item:active {
+  cursor: grabbing;
+}
+
+.rank-emoji {
+  font-size: 2em;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.target-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.rank-slot {
+  width: 160px;
+  min-height: 180px;
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+
+.rank-number {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  /* Prevent image dragging issues, let the div be dragged */
+  text-align: center;
 }
 
-.success {
-  border: 3px solid green !important;
+.rank-slot.correct-slot {
+  border-color: green;
+  background-color: rgba(144, 238, 144, 0.3);
+}
+
+.rank-slot.incorrect-slot {
+  border-color: red;
+  background-color: rgba(255, 99, 71, 0.3);
+}
+
+#rankingMessage {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 20px;
+  min-height: 1.5em;
 }

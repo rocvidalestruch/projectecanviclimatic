@@ -1,93 +1,124 @@
-const itemsContainer = document.querySelector(".items");
-const itemsList = Array.from(itemsContainer.children);
+/* -------------------------------------------------------------------------- */
+/*                          POLLUTION RANKING GAME                            */
+/* -------------------------------------------------------------------------- */
 
-// Aleatoritzar l'ordre dels elements (Fisher-Yates shuffle)
-for (let i = itemsList.length - 1; i > 0; i--) {
-  const j = Math.floor(Math.random() * (i + 1));
-  [itemsList[i], itemsList[j]] = [itemsList[j], itemsList[i]];
-}
+const rankingData = [
+  { rank: 1, emoji: "🚗", text: "Moltes persones la fan servir cada dia i provoca gasos." },
+  { rank: 2, emoji: "🛵", text: "Ràpides, petites, però també deixen gasos a l'aire." },
+  { rank: 3, emoji: "🏗️", text: "Grans màquines construeixen edificis i generen pols." },
+  { rank: 4, emoji: "❄️🔥", text: "Els edificis consumeixen molta electricitat per climatitzar-se." },
+  { rank: 5, emoji: "🏬", text: "Botigues i restaurants utilitzen llum i electrodomèstics constants." },
+  { rank: 6, emoji: "🍳", text: "Cuinar a casa o terrats genera fums i gasos locals." }
+];
 
-// Reordenar al DOM
-itemsList.forEach(item => itemsContainer.appendChild(item));
+const sourceContainer = document.getElementById("sourceContainer");
+const rankingMessage = document.getElementById("rankingMessage");
+const resetRankingBtn = document.getElementById("resetRankingBtn");
+const slots = document.querySelectorAll(".rank-slot");
+let rankedCorrectlyCount = 0;
 
-const items = document.querySelectorAll(".item");
-const bins = document.querySelectorAll(".bin");
-const message = document.getElementById("message");
-let correctCount = 0;
+function initRankingGame() {
+  sourceContainer.innerHTML = "";
+  rankingMessage.textContent = "";
+  rankingMessage.style.color = "black";
+  resetRankingBtn.style.display = "none";
+  rankedCorrectlyCount = 0;
 
-let draggedItem = null;
-
-items.forEach(item => {
-  item.addEventListener("dragstart", e => {
-    draggedItem = item;
-    e.dataTransfer.setData("type", e.target.dataset.type);
+  // Clear slots (except the number)
+  slots.forEach(slot => {
+    // Keep only the rank-number span
+    const numberSpan = slot.querySelector(".rank-number");
+    slot.innerHTML = "";
+    slot.appendChild(numberSpan);
+    slot.classList.remove("correct-slot", "incorrect-slot");
   });
 
-  item.addEventListener("dragend", () => {
-    draggedItem = null;
+  // Shuffle and create items
+  const shuffledData = [...rankingData].sort(() => Math.random() - 0.5);
+
+  shuffledData.forEach(item => {
+    const el = document.createElement("div");
+    el.classList.add("rank-item");
+    el.draggable = true;
+    el.dataset.rank = item.rank;
+    el.innerHTML = `<span class="rank-emoji">${item.emoji}</span>${item.text}`;
+
+    el.addEventListener("dragstart", handleRankDragStart);
+    sourceContainer.appendChild(el);
+  });
+}
+
+let draggedRankItem = null;
+
+function handleRankDragStart(e) {
+  draggedRankItem = e.target;
+  e.dataTransfer.setData("text/plain", e.target.dataset.rank);
+  e.dataTransfer.effectAllowed = "move";
+}
+
+// Slot Events
+slots.forEach(slot => {
+  slot.addEventListener("dragover", e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  });
+
+  slot.addEventListener("drop", e => {
+    e.preventDefault();
+    if (!draggedRankItem) return;
+
+    // If slot is already full, don't allow drop (optional, but good for UI)
+    if (slot.children.length > 1) return;
+
+    const itemRank = parseInt(draggedRankItem.dataset.rank);
+    const slotRank = parseInt(slot.dataset.rank);
+
+    // Append item to slot
+    slot.appendChild(draggedRankItem);
+
+    // Feedback
+    if (itemRank === slotRank) {
+      slot.classList.add("correct-slot");
+      slot.classList.remove("incorrect-slot");
+      draggedRankItem.draggable = false; // Lock it
+      rankedCorrectlyCount++;
+      checkRankingWin();
+    } else {
+      slot.classList.add("incorrect-slot");
+      slot.classList.remove("correct-slot");
+      rankingMessage.textContent = "❌ Mira les pistes i torna a intentar-ho.";
+      rankingMessage.style.color = "red";
+
+      // Return item to source after a delay if wrong? Or let user drag it out?
+      // Let's let user drag it out or auto-return.
+      // For this specific design, "Mira les pistes" implies try again.
+      // We will make it draggable out of the slot back to source or another slot.
+    }
   });
 });
 
-// Check for previous game completion
-if (localStorage.getItem("gameCompleted") === "true") {
-  const completionMsg = document.createElement("p");
-  completionMsg.textContent = "🏆 Ja has completat el joc anteriorment! Segueix així!";
-  completionMsg.style.color = "gold";
-  completionMsg.style.fontWeight = "bold";
-  message.parentNode.insertBefore(completionMsg, message);
-}
+// Allow returning items to source
+sourceContainer.addEventListener("dragover", e => e.preventDefault());
+sourceContainer.addEventListener("drop", e => {
+  e.preventDefault();
+  if (draggedRankItem && draggedRankItem.parentElement.classList.contains("rank-slot")) {
+    const oldSlot = draggedRankItem.parentElement;
+    sourceContainer.appendChild(draggedRankItem);
+    oldSlot.classList.remove("correct-slot", "incorrect-slot");
+  }
+});
 
-// Restore game state from sessionStorage
-const savedState = JSON.parse(sessionStorage.getItem("gameState"));
-if (savedState) {
-  correctCount = savedState.correctCount || 0;
-  if (savedState.recycledItems) {
-    savedState.recycledItems.forEach(type => {
-      // Find the first item of this type that hasn't been recycled yet
-      const itemToRemove = Array.from(items).find(i => i.dataset.type === type && document.body.contains(i));
-      if (itemToRemove) itemToRemove.remove();
-    });
+function checkRankingWin() {
+  if (rankedCorrectlyCount === 6) {
+    rankingMessage.textContent = "✅ Perfecte! Has ordenat correctament les activitats més contaminants.";
+    rankingMessage.style.color = "green";
+    resetRankingBtn.style.display = "inline-block";
+  } else {
+    rankingMessage.textContent = "";
   }
 }
 
-bins.forEach(bin => {
-  bin.addEventListener("dragover", e => e.preventDefault());
+resetRankingBtn.addEventListener("click", initRankingGame);
 
-
-  bin.addEventListener("drop", e => {
-    e.preventDefault();
-    const type = e.dataTransfer.getData("type");
-    if (e.currentTarget.id === type) {
-      e.currentTarget.classList.add("success");
-      correctCount++;
-      message.textContent = "Correcte!";
-      message.style.color = "green";
-
-      if (draggedItem) {
-        draggedItem.remove();
-      }
-
-      // Save state to sessionStorage
-      const currentRecycled = JSON.parse(sessionStorage.getItem("gameState") || '{"recycledItems":[]}').recycledItems || [];
-      currentRecycled.push(type);
-      sessionStorage.setItem("gameState", JSON.stringify({
-        correctCount: correctCount,
-        recycledItems: currentRecycled
-      }));
-
-    } else {
-      message.textContent = "Ups, aquest no és el contenidor correcte.";
-      message.style.color = "red";
-    }
-
-    if (correctCount === 5) {
-      message.textContent = "🎉 Has reciclat tot correctament!";
-      message.style.color = "green";
-
-      // Save completion to localStorage
-      localStorage.setItem("gameCompleted", "true");
-      // Clear session progress as game is done
-      sessionStorage.removeItem("gameState");
-    }
-  });
-});
+// Initialize on load
+initRankingGame();
