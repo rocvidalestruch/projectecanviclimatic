@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../styles/css/home.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-    .skyline-container {
+    .ciutat-container {
       width: 600px;
       margin: 40px auto;
       padding: 20px;
@@ -62,7 +62,7 @@
   </style>
 </head>
 
-<body>
+<body style="background-color: #5D8E3B;">
   <header class="main-header">
     <div class="container">
       <h1>Acció Climàtica — Aprèn i Actua</h1>
@@ -108,58 +108,89 @@
     </div>
   </header>
   <main class="container my-5 text-center">
-    <h2 class="section-title">Aprèn</h2>
-    <p class="mb-4">Conèixer els problemes ambientals de Barcelona és el primer pas per entendre com ens afecten i què
+    <h2 class="section-title text-white">Aprèn</h2>
+    <p class="mb-4 text-white">Conèixer els problemes ambientals de Barcelona és el primer pas per entendre com ens
+      afecten i què
       podem millorar.</p>
 
-    <div class="learn">
-      <h4>🌊 Aigua</h4>
-      <p><strong>Aprèn:</strong> Barcelona afronta una pressió creixent sobre les seves reserves d’aigua a causa de les
-        sequeres més freqüents i l’increment del consum. Gran part de l’aigua potable es perd en infraestructures
-        antigues i l’ús excessiu a la llar o el reg de jardins empitjora el problema.</p>
+    <div class="row g-4 learn-container">
+      <div class="col-md-4">
+        <div class="audience-card">
+          <div class="audience-icon text-center">
+            <i class="bi bi-droplet-fill"></i>
+          </div>
+          <h3>Aigua</h3>
+          <p><strong>Aprèn:</strong> Barcelona afronta una pressió creixent sobre les seves reserves d’aigua a causa de
+            les
+            sequeres més freqüents i l’increment del consum. Gran part de l’aigua potable es perd en infraestructures
+            antigues i l’ús excessiu a la llar o el reg de jardins empitjora el problema.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audience-card">
+          <div class="audience-icon text-center">
+            <i class="bi bi-trash3-fill"></i>
+          </div>
+          <h3>Escombraries i residus</h3>
+          <p><strong>Aprèn:</strong> L’acumulació de residus al sòl i els errors en la separació afecten el reciclatge i
+            contaminen l’entorn. Molts residus acaben en abocadors o al mar Mediterrani, afectant la biodiversitat
+            local.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audience-card">
+          <div class="audience-icon text-center">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <h3>Energia</h3>
+          <p><strong>Aprèn:</strong> El consum energètic de les llars i comerços augmenta durant els mesos calorosos,
+            especialment per l’ús de l’aire condicionat. Això incrementa les emissions de CO₂ i la demanda elèctrica en
+            hores punta.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="audience-card">
+          <div class="audience-icon text-center">
+            <i class="bi bi-tree-fill"></i>
+          </div>
+          <h3>Espais verds i biodiversitat</h3>
+          <p><strong>Aprèn:</strong> Les zones verdes urbanes redueixen la calor, filtren l’aire i milloren la salut
+            mental, però estan sota pressió per la urbanització i la manca de manteniment. Cada arbre compta com a
+            refugi
+            climàtic.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="audience-card">
+          <div class="audience-icon text-center">
+            <i class="bi bi-car-front-fill"></i>
+          </div>
+          <h3>Mobilitat</h3>
+          <p><strong>Aprèn:</strong> El trànsit és una de les principals fonts de contaminació a Barcelona. Els vehicles
+            privats emeten gasos que agreugen l’efecte hivernacle i la mala qualitat de l’aire afecta la salut pública.
+          </p>
+        </div>
+      </div>
     </div>
 
-    <div class="learn">
-      <h4>♻️ Escombraries i residus</h4>
-      <p><strong>Aprèn:</strong> L’acumulació de residus al sòl i els errors en la separació afecten el reciclatge i
-        contaminen l’entorn. Molts residus acaben en abocadors o al mar Mediterrani, afectant la biodiversitat local.
-      </p>
-    </div>
-
-    <div class="learn">
-      <h4>⚡ Energia</h4>
-      <p><strong>Aprèn:</strong> El consum energètic de les llars i comerços augmenta durant els mesos calorosos,
-        especialment per l’ús de l’aire condicionat. Això incrementa les emissions de CO₂ i la demanda elèctrica en
-        hores
-        punta.</p>
-    </div>
-
-    <div class="learn">
-      <h4>🌳 Espais verds i biodiversitat</h4>
-      <p><strong>Aprèn:</strong> Les zones verdes urbanes redueixen la calor, filtren l’aire i milloren la salut
-        mental, però estan sota pressió per la urbanització i la manca de manteniment. Cada arbre compta com a refugi
-        climàtic.</p>
-    </div>
-
-    <div class="learn">
-      <h4>🚶 Mobilitat</h4>
-      <p><strong>Aprèn:</strong> El trànsit és una de les principals fonts de contaminació a Barcelona. Els vehicles
-        privats emeten gasos que agreugen l’efecte hivernacle i la mala qualitat de l’aire afecta la salut pública.</p>
-    </div>
-
-    <div class="skyline-container">
+    <div class="ciutat-container">
       <h2>Contaminació a Barcelona</h2>
 
-      <canvas id="skyline" width="500" height="220"></canvas>
+      <canvas id="ciutat" width="500" height="220"></canvas>
 
       <button id="pollutionBtn">Inicia la contaminació</button>
     </div>
 
-    <script src="skyline.js"></script>
+    <script src="../../src/js/ciutat.js"></script>
 
 
 
-    <script src="js/apren.js"></script>
+    <script src="../../src/js/apren.js"></script>
 </body>
 
 </html>

@@ -7,29 +7,29 @@ const rankingData = [
   { rank: 6, image: "../../img/cuinar.jpg", text: "Cuinar a casa o terrats genera fums i gasos locals." }
 ];
 
-const sourceContainer = document.getElementById("sourceContainer");
-const rankingMessage = document.getElementById("rankingMessage");
-const resetRankingBtn = document.getElementById("resetRankingBtn");
-const slots = document.querySelectorAll(".rank-slot");
-let rankedCorrectlyCount = 0;
+const contenidorPrincipal = document.getElementById("contenidorPrincipal");
+const misstgeRanking = document.getElementById("misstgeRanking");
+const tornar_a_jugar_boto = document.getElementById("tornar_a_jugar_boto");
+const espais = document.querySelectorAll(".rank-slot");
+let ContadorCorrectes = 0;
 
 function initRankingGame() {
-  sourceContainer.innerHTML = "";
-  rankingMessage.textContent = "";
-  rankingMessage.style.color = "black";
-  resetRankingBtn.style.display = "none";
-  rankedCorrectlyCount = 0;
+  contenidorPrincipal.innerHTML = "";
+  misstgeRanking.textContent = "";
+  misstgeRanking.style.color = "black";
+  tornar_a_jugar_boto.style.display = "none";
+  ContadorCorrectes = 0;
 
-  slots.forEach(slot => {
+  espais.forEach(slot => {
     const numberSpan = slot.querySelector(".rank-number");
     slot.innerHTML = "";
     slot.appendChild(numberSpan);
     slot.classList.remove("correct-slot", "incorrect-slot");
   });
 
-  const shuffledData = [...rankingData].sort(() => Math.random() - 0.5);
+  const randomitzarDades = [...rankingData].sort(() => Math.random() - 0.5);
 
-  shuffledData.forEach(item => {
+  randomitzarDades.forEach(item => {
     const el = document.createElement("div");
     el.classList.add("rank-item");
     el.draggable = true;
@@ -37,7 +37,7 @@ function initRankingGame() {
     el.innerHTML = `<img src="${item.image}" class="rank-img" alt="Activity">${item.text}`;
 
     el.addEventListener("dragstart", handleRankDragStart);
-    sourceContainer.appendChild(el);
+    contenidorPrincipal.appendChild(el);
   });
 }
 
@@ -49,7 +49,7 @@ function handleRankDragStart(e) {
   e.dataTransfer.effectAllowed = "move";
 }
 
-slots.forEach(slot => {
+espais.forEach(slot => {
   slot.addEventListener("dragover", e => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
@@ -69,38 +69,38 @@ slots.forEach(slot => {
     if (itemRank === slotRank) {
       slot.classList.add("correct-slot");
       slot.classList.remove("incorrect-slot");
-      draggedRankItem.draggable = false; // Lock it
-      rankedCorrectlyCount++;
+      draggedRankItem.draggable = false;
+      ContadorCorrectes++;
       checkRankingWin();
     } else {
       slot.classList.add("incorrect-slot");
       slot.classList.remove("correct-slot");
-      rankingMessage.textContent = "❌ Mira les pistes i torna a intentar-ho.";
-      rankingMessage.style.color = "red";
+      misstgeRanking.textContent = "❌ Mira les pistes i torna a intentar-ho.";
+      misstgeRanking.style.color = "red";
     }
   });
 });
 
-sourceContainer.addEventListener("dragover", e => e.preventDefault());
-sourceContainer.addEventListener("drop", e => {
+contenidorPrincipal.addEventListener("dragover", e => e.preventDefault());
+contenidorPrincipal.addEventListener("drop", e => {
   e.preventDefault();
   if (draggedRankItem && draggedRankItem.parentElement.classList.contains("rank-slot")) {
     const oldSlot = draggedRankItem.parentElement;
-    sourceContainer.appendChild(draggedRankItem);
+    contenidorPrincipal.appendChild(draggedRankItem);
     oldSlot.classList.remove("correct-slot", "incorrect-slot");
   }
 });
 
 function checkRankingWin() {
-  if (rankedCorrectlyCount === 6) {
-    rankingMessage.textContent = "✅ Perfecte! Has ordenat correctament les activitats més contaminants.";
-    rankingMessage.style.color = "green";
-    resetRankingBtn.style.display = "inline-block";
+  if (ContadorCorrectes === 6) {
+    misstgeRanking.textContent = "Perfecte! Has ordenat correctament les activitats més contaminants.";
+    misstgeRanking.style.color = "green";
+    tornar_a_jugar_boto.style.display = "inline-block";
   } else {
-    rankingMessage.textContent = "";
+    misstgeRanking.textContent = "";
   }
 }
 
-resetRankingBtn.addEventListener("click", initRankingGame);
+tornar_a_jugar_boto.addEventListener("click", initRankingGame);
 
 initRankingGame();

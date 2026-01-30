@@ -135,21 +135,7 @@
             padding-bottom: 15px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--secondary-green), var(--light-green));
-            border-radius: 2px;
-        }
 
-        .section-title.text-center::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
 
         .feature-box {
             background-color: var(--cream);
@@ -272,13 +258,7 @@
             border-color: var(--secondary-green);
         }
 
-        .accordion-button::after {
-            filter: brightness(0) saturate(100%);
-        }
 
-        .accordion-button:not(.collapsed)::after {
-            filter: brightness(0) saturate(100%) invert(100%);
-        }
 
         .accordion-item {
             border: none;
