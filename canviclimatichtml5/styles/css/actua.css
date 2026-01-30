@@ -42,10 +42,15 @@ body {
   cursor: grabbing;
 }
 
-.rank-emoji {
-  font-size: 2em;
+.rank-img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
   display: block;
-  margin-bottom: 5px;
+  pointer-events: none;
+  /* Prevents image from being dragged independently */
 }
 
 .target-slots {

@@ -13,7 +13,8 @@ body {
 /* Contenedor del mapa */
 .map-container {
   position: relative;
-  width: 25%; /* ocupa una cuarta parte */
+  width: 25%;
+  /* ocupa una cuarta parte */
   min-width: 250px;
   border-radius: 12px;
   overflow: hidden;

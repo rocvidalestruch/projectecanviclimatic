@@ -3,12 +3,12 @@
 /* -------------------------------------------------------------------------- */
 
 const rankingData = [
-  { rank: 1, emoji: "🚗", text: "Moltes persones la fan servir cada dia i provoca gasos." },
-  { rank: 2, emoji: "🛵", text: "Ràpides, petites, però també deixen gasos a l'aire." },
-  { rank: 3, emoji: "🏗️", text: "Grans màquines construeixen edificis i generen pols." },
-  { rank: 4, emoji: "❄️🔥", text: "Els edificis consumeixen molta electricitat per climatitzar-se." },
-  { rank: 5, emoji: "🏬", text: "Botigues i restaurants utilitzen llum i electrodomèstics constants." },
-  { rank: 6, emoji: "🍳", text: "Cuinar a casa o terrats genera fums i gasos locals." }
+  { rank: 1, image: "../../img/cotxe_transit.jpg", text: "Moltes persones la fan servir cada dia i provoca gasos." },
+  { rank: 2, image: "../../img/motos_transit.jpg", text: "Ràpides, petites, però també deixen gasos a l'aire." },
+  { rank: 3, image: "../../img/maquinas_construccio.jpg", text: "Grans màquines construeixen edificis i generen pols." },
+  { rank: 4, image: "../../img/climatitzacio.jpg", text: "Els edificis consumeixen molta electricitat per climatitzar-se." },
+  { rank: 5, image: "../../img/restaurant.jpg", text: "Botigues i restaurants utilitzen llum i electrodomèstics constants." },
+  { rank: 6, image: "../../img/cuinar.jpg", text: "Cuinar a casa o terrats genera fums i gasos locals." }
 ];
 
 const sourceContainer = document.getElementById("sourceContainer");
@@ -41,7 +41,7 @@ function initRankingGame() {
     el.classList.add("rank-item");
     el.draggable = true;
     el.dataset.rank = item.rank;
-    el.innerHTML = `<span class="rank-emoji">${item.emoji}</span>${item.text}`;
+    el.innerHTML = `<img src="${item.image}" class="rank-img" alt="Activity">${item.text}`;
 
     el.addEventListener("dragstart", handleRankDragStart);
     sourceContainer.appendChild(el);

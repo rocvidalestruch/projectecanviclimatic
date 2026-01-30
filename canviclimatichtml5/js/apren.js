@@ -24,7 +24,7 @@ function drawBackground() {
    EDIFICIS FIXOS
    ========================= */
 function drawBuildings() {
-  ctx.fillStyle = "#3a3a3a";
+  ctx.fillStyle = "#745f5fff";
 
   const buildings = [
     { x: 40, w: 60, h: 120 },
