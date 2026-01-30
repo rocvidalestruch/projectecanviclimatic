@@ -14,21 +14,25 @@ let pollutionStarted = false;
 let pollutionTimer = null;
 
 // Velocitat de contaminació
-const pollutionInterval = 500; // ms
+const pollutionInterval = 100; // ms
 const pollutionStep = 0.07;
 
 /* =========================
    FONS (CEL + CONTAMINACIÓ)
    ========================= */
 function drawBackground() {
-    const baseBlue = 206;
+    // Color inicial del cel (realista)
+    const baseR = 155; // cel clar: més blau que vermell
+    const baseG = 206;
+    const baseB = 225; // cel blau clar
 
-    const value = Math.max(
-        120,
-        baseBlue - pollutionLevel * 80
-    );
+    // A mesura que puja la contaminació, s'apropa al gris
+    // gris final aproximat: 150, 150, 150
+    const r = baseR + pollutionLevel * (200 - baseR);
+    const g = baseG + pollutionLevel * (200 - baseG);
+    const b = baseB + pollutionLevel * (220 - baseB);
 
-    ctx.fillStyle = `rgb(${value}, ${value}, ${value})`;
+    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
     ctx.fillRect(0, 0, DESIGN_WIDTH, groundY);
 }
 
@@ -57,9 +61,6 @@ function drawBuildings() {
     });
 }
 
-/* =========================
-   ESCENA COMPLETA (ESCALADA)
-   ========================= */
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 

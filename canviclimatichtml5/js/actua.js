@@ -1,7 +1,3 @@
-/* -------------------------------------------------------------------------- */
-/*                          POLLUTION RANKING GAME                            */
-/* -------------------------------------------------------------------------- */
-
 const rankingData = [
   { rank: 1, image: "../../img/cotxe_transit.jpg", text: "Moltes persones la fan servir cada dia i provoca gasos." },
   { rank: 2, image: "../../img/motos_transit.jpg", text: "Ràpides, petites, però també deixen gasos a l'aire." },
@@ -24,16 +20,13 @@ function initRankingGame() {
   resetRankingBtn.style.display = "none";
   rankedCorrectlyCount = 0;
 
-  // Clear slots (except the number)
   slots.forEach(slot => {
-    // Keep only the rank-number span
     const numberSpan = slot.querySelector(".rank-number");
     slot.innerHTML = "";
     slot.appendChild(numberSpan);
     slot.classList.remove("correct-slot", "incorrect-slot");
   });
 
-  // Shuffle and create items
   const shuffledData = [...rankingData].sort(() => Math.random() - 0.5);
 
   shuffledData.forEach(item => {
@@ -56,7 +49,6 @@ function handleRankDragStart(e) {
   e.dataTransfer.effectAllowed = "move";
 }
 
-// Slot Events
 slots.forEach(slot => {
   slot.addEventListener("dragover", e => {
     e.preventDefault();
@@ -67,16 +59,13 @@ slots.forEach(slot => {
     e.preventDefault();
     if (!draggedRankItem) return;
 
-    // If slot is already full, don't allow drop (optional, but good for UI)
     if (slot.children.length > 1) return;
 
     const itemRank = parseInt(draggedRankItem.dataset.rank);
     const slotRank = parseInt(slot.dataset.rank);
 
-    // Append item to slot
     slot.appendChild(draggedRankItem);
 
-    // Feedback
     if (itemRank === slotRank) {
       slot.classList.add("correct-slot");
       slot.classList.remove("incorrect-slot");
@@ -88,16 +77,10 @@ slots.forEach(slot => {
       slot.classList.remove("correct-slot");
       rankingMessage.textContent = "❌ Mira les pistes i torna a intentar-ho.";
       rankingMessage.style.color = "red";
-
-      // Return item to source after a delay if wrong? Or let user drag it out?
-      // Let's let user drag it out or auto-return.
-      // For this specific design, "Mira les pistes" implies try again.
-      // We will make it draggable out of the slot back to source or another slot.
     }
   });
 });
 
-// Allow returning items to source
 sourceContainer.addEventListener("dragover", e => e.preventDefault());
 sourceContainer.addEventListener("drop", e => {
   e.preventDefault();
@@ -120,5 +103,4 @@ function checkRankingWin() {
 
 resetRankingBtn.addEventListener("click", initRankingGame);
 
-// Initialize on load
 initRankingGame();

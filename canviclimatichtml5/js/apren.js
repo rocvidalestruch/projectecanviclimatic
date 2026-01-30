@@ -1,9 +1,9 @@
 const canvas = document.getElementById("cityCanvas");
 const ctx = canvas.getContext("2d");
 
-const groundY = 300; // adaptat a canvas 800x400
+const groundY = 300;
 
-let pollutionLevel = 0; // 0 a 1
+let pollutionLevel = 0;
 
 /* =========================
    FONS (CEL + CONTAMINACIÓ)
@@ -87,7 +87,7 @@ function drawScene() {
 const slider = document.getElementById("pollutionSlider");
 
 slider.addEventListener("input", (e) => {
-  pollutionLevel = e.target.value / 100;
+  pollutionLevel = e.target.value / 200;
   drawScene();
 });
 
