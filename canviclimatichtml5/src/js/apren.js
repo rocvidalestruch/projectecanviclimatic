@@ -1,10 +1,7 @@
-/* =========================
-   CANVAS: CIUTAT BARCELONA
-   ========================= */
-// CORRECCIÓ: L'ID ha de ser "ciutat" per coincidir amb l'HTML
+
 const canvas = document.getElementById("ciutat");
 const ctx = canvas.getContext("2d");
-const terraY = 180; // Ajustat per a l'alçada del canvas de 220px
+const terraY = 180;
 let nivellContaminacio = 0;
 
 function dibuixarFons() {
@@ -30,12 +27,10 @@ function dibuixarEscena() {
   ctx.fillRect(0, terraY, canvas.width, canvas.height);
   dibuixarEdificis();
   
-  // Sagrada Família simplificada
   ctx.fillStyle = "#6b5b3e";
   ctx.fillRect(350, terraY - 100, 60, 100);
 }
 
-// Botó de contaminació (substitueix el slider si no existeix)
 const btnPollution = document.getElementById("pollutionBtn");
 if (btnPollution) {
   btnPollution.addEventListener("click", () => {

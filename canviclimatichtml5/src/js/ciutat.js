@@ -1,33 +1,23 @@
 const canvas = document.getElementById("ciutat");
 const ctx = canvas.getContext("2d");
 
-// Mida original del disseny del ciutat
 const amplada = 1000;
 const altura = 400;
 const terraY = 320;
 
-// Contaminació (0 = net, 1 = molt contaminat)
 let nivellContaminacio = 0;
 
-// Control d'estat
 let pollutionStarted = false;
 let pollutionTimer = null;
 
-// Velocitat de contaminació
-const pollutionInterval = 100; // ms
+const pollutionInterval = 100;
 const pollutionStep = 0.07;
 
-/* =========================
-   FONS (CEL + CONTAMINACIÓ)
-   ========================= */
 function dibuixarFons() {
-    // Color inicial del cel (realista)
-    const baseR = 155; // cel clar: més blau que vermell
+    const baseR = 155; 
     const baseG = 206;
-    const baseB = 225; // cel blau clar
+    const baseB = 225; 
 
-    // A mesura que puja la contaminació, s'apropa al gris
-    // gris final aproximat: 150, 150, 150
     const r = baseR + nivellContaminacio * (200 - baseR);
     const g = baseG + nivellContaminacio * (200 - baseG);
     const b = baseB + nivellContaminacio * (220 - baseB);
@@ -36,9 +26,6 @@ function dibuixarFons() {
     ctx.fillRect(0, 0, amplada, terraY);
 }
 
-/* =========================
-   EDIFICIS FIXOS
-   ========================= */
 function dibuixarEdificis() {
     ctx.fillStyle = "#3a3a3a";
 
@@ -64,7 +51,6 @@ function dibuixarEdificis() {
 function dibuixarEscena() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Escalar per adaptar tot dins del canvas petit
     const scaleX = canvas.width / amplada;
     const scaleY = canvas.height / altura;
     const scale = Math.min(scaleX, scaleY);
@@ -74,19 +60,16 @@ function dibuixarEscena() {
 
     dibuixarFons();
 
-    // Terra
     ctx.fillStyle = "#2c2c2c";
     ctx.fillRect(0, terraY, amplada, altura);
 
     dibuixarEdificis();
 
-    /* TORRE GLÒRIES */
     ctx.fillStyle = "#4a6fa5";
     ctx.beginPath();
     ctx.ellipse(700, terraY - 110, 30, 110, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    /* SAGRADA FAMÍLIA */
     ctx.fillStyle = "#6b5b3e";
 
     for (let i = 0; i < 4; i++) {
@@ -104,11 +87,8 @@ function dibuixarEscena() {
     ctx.restore();
 }
 
-/* =========================
-   INICI CONTAMINACIÓ (BOTÓ)
-   ========================= */
 document.getElementById("pollutionBtn").addEventListener("click", () => {
-    if (pollutionStarted) return; // ja està en marxa
+    if (pollutionStarted) return;
 
     pollutionStarted = true;
 
@@ -122,5 +102,4 @@ document.getElementById("pollutionBtn").addEventListener("click", () => {
     }, pollutionInterval);
 });
 
-// Dibuix inicial (aire net)
 dibuixarEscena();

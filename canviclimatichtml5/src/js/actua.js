@@ -10,10 +10,9 @@ const rankingData = [
 const contenidorPrincipal = document.getElementById("contenidorPrincipal");
 const misstgeRanking = document.getElementById("misstgeRanking");
 const tornar_a_jugar_boto = document.getElementById("tornar_a_jugar_boto");
-const espais = document.querySelectorAll(".rank-slot");
+const espais = document.querySelectorAll(".lloc-ranking");
 let ContadorCorrectes = 0;
 
-// Check history on load
 async function checkPreviousCompletion() {
   if (window.StorageManager) {
     const history = await window.StorageManager.getHistory();
@@ -38,10 +37,10 @@ function initRankingGame() {
   ContadorCorrectes = 0;
 
   espais.forEach(slot => {
-    const numberSpan = slot.querySelector(".rank-number");
+    const numberSpan = slot.querySelector(".numero-ranking");
     slot.innerHTML = "";
     slot.appendChild(numberSpan);
-    slot.classList.remove("correct-slot", "incorrect-slot");
+    slot.classList.remove("lloc-correcta", "lloc-incorrecta");
   });
 
   const randomitzarDades = [...rankingData].sort(() => Math.random() - 0.5);
@@ -86,14 +85,14 @@ espais.forEach(slot => {
     slot.appendChild(draggedRankItem);
 
     if (itemRank === slotRank) {
-      slot.classList.add("correct-slot");
-      slot.classList.remove("incorrect-slot");
+      slot.classList.add("lloc-correcta");
+      slot.classList.remove("lloc-incorrecta");
       draggedRankItem.draggable = false;
       ContadorCorrectes++;
       checkRankingWin();
     } else {
-      slot.classList.add("incorrect-slot");
-      slot.classList.remove("correct-slot");
+      slot.classList.add("lloc-incorrecta");
+      slot.classList.remove("lloc-correcta");
       misstgeRanking.textContent = "❌ Mira les pistes i torna a intentar-ho.";
       misstgeRanking.style.color = "red";
     }
@@ -103,10 +102,10 @@ espais.forEach(slot => {
 contenidorPrincipal.addEventListener("dragover", e => e.preventDefault());
 contenidorPrincipal.addEventListener("drop", e => {
   e.preventDefault();
-  if (draggedRankItem && draggedRankItem.parentElement.classList.contains("rank-slot")) {
+  if (draggedRankItem && draggedRankItem.parentElement.classList.contains("lloc-ranking")) {
     const oldSlot = draggedRankItem.parentElement;
     contenidorPrincipal.appendChild(draggedRankItem);
-    oldSlot.classList.remove("correct-slot", "incorrect-slot");
+    oldSlot.classList.remove("lloc-correcta", "lloc-incorrecta");
   }
 });
 
@@ -116,7 +115,6 @@ function checkRankingWin() {
     misstgeRanking.style.color = "green";
     tornar_a_jugar_boto.style.display = "inline-block";
 
-    // Save to history
     if (window.StorageManager) {
       window.StorageManager.logHistory({
         timestamp: Date.now(),
@@ -125,7 +123,6 @@ function checkRankingWin() {
       });
     }
   } else {
-    // Only clear if not displaying the "previously completed" message initially
     if (!misstgeRanking.textContent.includes("anteriorment")) {
       misstgeRanking.textContent = "";
     }

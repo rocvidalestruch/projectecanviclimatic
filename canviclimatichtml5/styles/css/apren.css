@@ -1,52 +1,44 @@
-body {
-  background-color: #eef6f9;
-}
+.ciutat-container {
+      width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
 
-/* Contenedor general */
-.map-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
+    canvas {
+      display: block;
+      margin: 0 auto 15px;
+      border: 1px solid #ccc;
+    }
 
-/* Contenedor del mapa */
-.map-container {
-  position: relative;
-  width: 25%;
-  /* ocupa una cuarta parte */
-  min-width: 250px;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.5s ease, filter 0.8s ease;
+    button {
+      padding: 8px 16px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+spacer {width: 50px;}
+body {background-color: #5D8E3B !important;}
+#Calculadora {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
 }
-
-.map-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
+#fitxer {
+    border-radius: 15px;
+    padding: 30px;
+    background-color: #e2e2e2;
 }
-
-/* Capa de calor adicional */
-.heat-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: rgba(255, 0, 0, 0);
-  pointer-events: none;
-  transition: background 0.5s ease;
-}
-
-.input-container {
-  margin-top: 25px;
-}
-
-/* Responsiu */
-@media (max-width: 768px) {
-  .map-container {
-    width: 60%;
-  }
+#botofitxer {
+  background-color: #5D8E3B;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold; 
 }

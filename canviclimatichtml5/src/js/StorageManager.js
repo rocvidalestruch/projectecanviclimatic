@@ -14,7 +14,6 @@ class StorageManager {
         } catch (e) {
             if (e.name === 'QuotaExceededError') {
                 console.error("StorageManager: LocalStorage quota exceeded!", e);
-                // Optional: Clear old data here if needed
                 alert("Atenció: No s'ha pogut guardar l'estat localment per falta d'espai.");
             } else {
                 console.error("StorageManager: Error saving to LocalStorage", e);

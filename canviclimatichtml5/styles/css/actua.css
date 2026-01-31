@@ -2,7 +2,6 @@ body {
   background-color: #f6f9f6;
 }
 
-/* Pollution Ranking Game Styles */
 .ranking-section {
   margin-top: 50px;
   padding-top: 30px;
@@ -50,7 +49,6 @@ body {
   margin-bottom: 8px;
   display: block;
   pointer-events: none;
-  /* Prevents image from being dragged independently */
 }
 
 .target-espais {
@@ -60,7 +58,7 @@ body {
   gap: 15px;
 }
 
-.rank-slot {
+.lloc-ranking {
   width: 160px;
   min-height: 180px;
   border: 2px dashed #aaa;
@@ -73,7 +71,7 @@ body {
   position: relative;
 }
 
-.rank-number {
+.numero-ranking {
   font-size: 1.5em;
   font-weight: bold;
   color: #555;
@@ -83,12 +81,12 @@ body {
   text-align: center;
 }
 
-.rank-slot.correct-slot {
+.lloc-ranking.lloc-correcta {
   border-color: green;
   background-color: rgba(144, 238, 144, 0.3);
 }
 
-.rank-slot.incorrect-slot {
+.lloc-ranking.lloc-incorrecta {
   border-color: red;
   background-color: rgba(255, 99, 71, 0.3);
 }

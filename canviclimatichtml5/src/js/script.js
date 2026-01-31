@@ -26,7 +26,7 @@ fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         
-        const midaMaxima = 5 * 1024 * 1024; // Límit de 5MB
+        const midaMaxima = 5 * 1024 * 1024;
         if (file.size > midaMaxima) {
             alert("El fitxer és massa gran (màxim 5MB).");
             fileInput.value = "";
