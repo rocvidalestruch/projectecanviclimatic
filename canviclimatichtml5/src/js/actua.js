@@ -13,6 +13,23 @@ const tornar_a_jugar_boto = document.getElementById("tornar_a_jugar_boto");
 const espais = document.querySelectorAll(".rank-slot");
 let ContadorCorrectes = 0;
 
+// Check history on load
+async function checkPreviousCompletion() {
+  if (window.StorageManager) {
+    const history = await window.StorageManager.getHistory();
+    const recentWin = history.find(item => {
+      const now = Date.now();
+      const oneDay = 24 * 60 * 60 * 1000;
+      return (now - item.timestamp) < oneDay;
+    });
+
+    if (recentWin) {
+      misstgeRanking.textContent = "Aquest joc s'ha completat correctament anteriorment avui!";
+      misstgeRanking.style.color = "blue";
+    }
+  }
+}
+
 function initRankingGame() {
   contenidorPrincipal.innerHTML = "";
   misstgeRanking.textContent = "";
@@ -39,6 +56,8 @@ function initRankingGame() {
     el.addEventListener("dragstart", handleRankDragStart);
     contenidorPrincipal.appendChild(el);
   });
+
+  checkPreviousCompletion();
 }
 
 let draggedRankItem = null;
@@ -96,8 +115,20 @@ function checkRankingWin() {
     misstgeRanking.textContent = "Perfecte! Has ordenat correctament les activitats més contaminants.";
     misstgeRanking.style.color = "green";
     tornar_a_jugar_boto.style.display = "inline-block";
+
+    // Save to history
+    if (window.StorageManager) {
+      window.StorageManager.logHistory({
+        timestamp: Date.now(),
+        score: 6,
+        type: 'ranking_game_win'
+      });
+    }
   } else {
-    misstgeRanking.textContent = "";
+    // Only clear if not displaying the "previously completed" message initially
+    if (!misstgeRanking.textContent.includes("anteriorment")) {
+      misstgeRanking.textContent = "";
+    }
   }
 }
 
