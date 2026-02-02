@@ -1,0 +1,23 @@
+.main-header {
+  background: linear-gradient(135deg, var(--verde) 0%, var(--verde-claro) 100%);
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.logo-title { font-size: 1.5rem; font-weight: 700; margin: 0; }
+.logo-subtitle { font-size: 0.85rem; margin: 0; opacity: 0.9; }
+.main-nav { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.main-nav a { color: white; text-decoration: none; padding: 0.4rem 1rem; border-radius: 1rem; font-weight: 500; }
+.main-nav a:hover { background: rgba(255,255,255,0.2); }
+.main-nav a.active { background: white; color: var(--verde); }
+.main-footer { background: var(--verde); color: white; padding: 1.5rem 0; margin-top: 2rem; text-align: center; }
+.footer-content { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-content p { margin: 0; opacity: 0.9; }
+.footer-links { display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem; }
+.footer-links a { color: white; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+@media (max-width: 768px) { .header-content { flex-direction: column; text-align: center; } .main-nav { justify-content: center; } .logo-title { font-size: 1.25rem; } }
+

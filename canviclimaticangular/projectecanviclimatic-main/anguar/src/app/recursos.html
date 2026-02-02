@@ -1,0 +1,20 @@
+<div class="recursos-container">
+  <div class="container">
+    <h1 class="page-title">Recursos i Enllaços</h1>
+    <p class="page-subtitle">Guies, datasets i normativa sobre canvi climàtic a Barcelona.</p>
+
+    <div class="recursos-grid">
+      <div *ngFor="let cat of categories" class="categoria-section">
+        <h2 class="categoria-title">{{ cat.nom }}</h2>
+        <div class="recursos-list">
+          <div *ngFor="let r of cat.recursos" class="recurs-card">
+            <h3 class="recurs-titol">{{ r.titol }}</h3>
+            <p class="recurs-text">{{ r.text }}</p>
+            <p class="recurs-meta">{{ r.font }} · {{ r.any }}</p>
+            <a [href]="r.url" class="btn-recurs" target="_blank" rel="noopener noreferrer">Accedir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

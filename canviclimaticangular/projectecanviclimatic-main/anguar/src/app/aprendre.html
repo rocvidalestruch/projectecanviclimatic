@@ -1,0 +1,36 @@
+<div class="learn-layout">
+  <aside class="sidebar">
+    <h3 class="sidebar-title">Temes</h3>
+    <ul class="theme-list">
+      <li *ngFor="let t of temes" 
+          [class.active]="temaActual.id === t.id"
+          (click)="canviarTema(t)">
+        <span class="theme-name">{{ t.titol }}</span>
+      </li>
+    </ul>
+  </aside>
+
+  <main class="learn-content">
+    <div class="learn-card" *ngIf="temaActual">
+      <div class="learn-header">
+        <h2 class="learn-title">{{ temaActual.titol }}</h2>
+      </div>
+
+      <div class="learn-section">
+        <h3 class="section-subtitle">Aprèn</h3>
+        <p class="learn-text">{{ temaActual.apren }}</p>
+      </div>
+
+      <div class="learn-section">
+        <h3 class="section-subtitle">Per què importa</h3>
+        <p class="learn-text">{{ temaActual.perQueImporta }}</p>
+      </div>
+
+      <div class="learn-section">
+        <h3 class="section-subtitle">Senyals a la teva ciutat</h3>
+        <p class="learn-text">{{ temaActual.senyals }}</p>
+      </div>
+
+    </div>
+  </main>
+</div>

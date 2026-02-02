@@ -1,0 +1,13 @@
+.contaminacio-container { padding: 2rem 0; background: var(--crema); }
+.page-title { font-size: 2rem; font-weight: 700; color: var(--verde); text-align: center; margin-bottom: 2rem; }
+.targeta { background: white; padding: 1.5rem; border-left: 4px solid var(--verde-claro); }
+.fila { padding: 1rem 0; border-bottom: 1px solid #eee; }
+.fila:last-child { border-bottom: none; }
+.fila h3 { font-size: 1rem; color: var(--verde); margin: 0 0 0.5rem 0; }
+.fila-contingut { display: flex; gap: 1rem; align-items: flex-start; }
+.fila-contingut p { flex: 1; margin: 0; font-size: 0.9rem; line-height: 1.5; color: #555; }
+.spinner-wrapper { position: relative; flex-shrink: 0; }
+.percentatge-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.1rem; font-weight: 700; }
+.mt-4 { margin-top: 2rem; }
+.btn-link { background: var(--verde-claro); color: white; padding: 0.6rem 1.5rem; border-radius: 2rem; text-decoration: none; font-weight: 600; }
+.btn-link:hover { background: var(--verde); color: white; }

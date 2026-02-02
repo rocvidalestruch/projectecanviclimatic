@@ -1,0 +1,47 @@
+<div class="sobre-container">
+  <div class="container">
+    <h1 class="page-title">Sobre ClimaBCN</h1>
+
+    <section class="info-section">
+      <h2 class="section-title">El projecte</h2>
+      <div class="project-card">
+        <h3 class="project-name">{{ projectInfo.nom }}</h3>
+        <p class="project-description">{{ projectInfo.descripcio }}</p>
+        <div class="project-objective">
+          <h4>Objectiu:</h4>
+          <p>{{ projectInfo.objectiu }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h2 class="section-title">Metodologia</h2>
+      <div class="metodologia-grid">
+        <div *ngFor="let item of metodologia" class="metodologia-card">
+          <h3 class="metodologia-titol">{{ item.titol }}</h3>
+          <p class="metodologia-descripcio">{{ item.descripcio }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h2 class="section-title">Crèdits i fonts</h2>
+      <div class="credits-grid">
+        <div *ngFor="let credit of credits" class="credit-card">
+          <h3 class="credit-categoria">{{ credit.categoria }}</h3>
+          <ul class="credit-list">
+            <li *ngFor="let item of credit.items">{{ item }}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <div class="links-section">
+        <a routerLink="/" class="btn-link">Tornar a l'inici</a>
+        <a routerLink="/recursos" class="btn-link">Veure recursos</a>
+      </div>
+    </section>
+  </div>
+</div>
+

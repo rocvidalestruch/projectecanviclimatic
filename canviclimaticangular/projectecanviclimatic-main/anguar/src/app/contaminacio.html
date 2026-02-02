@@ -1,0 +1,18 @@
+<div class="contaminacio-container">
+  <div class="container">
+    <h1 class="page-title">Nivells de contaminació a Barcelona</h1>
+    <div class="targeta">
+      <div *ngFor="let ind of indicadors" class="fila">
+        <h3>{{ ind.nom }}</h3>
+        <div class="fila-contingut">
+          <div class="spinner-wrapper">
+            <mat-progress-spinner mode="determinate" [value]="ind.percentatge" diameter="80" strokeWidth="6"></mat-progress-spinner>
+            <span class="percentatge-text">{{ ind.percentatge }}%</span>
+          </div>
+          <p>{{ ind.dato }}</p>
+        </div>
+      </div>
+    </div>
+    <p class="text-center mt-4"><a routerLink="/" class="btn-link">Tornar a l'inici</a></p>
+  </div>
+</div>

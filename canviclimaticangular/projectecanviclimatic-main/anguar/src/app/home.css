@@ -1,0 +1,102 @@
+:host {
+  --verde: #2d5016;
+  --verde-claro: #4a7c2c;
+  --crema: #f5f1e8;
+}
+
+.seccion-hero {
+  background: linear-gradient(135deg, var(--verde-claro) 0%, #6b9b47 100%);
+  color: white;
+}
+
+.seccion-estadisticas {
+  background: linear-gradient(135deg, #5d4037 0%, #8d6e63 100%);
+  color: white;
+}
+
+.tarjeta-volteable {
+  height: 280px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.tarjeta-interior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.tarjeta-volteable.volteada .tarjeta-interior {
+  transform: rotateY(180deg);
+}
+
+.cara-frontal,
+.cara-trasera {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+.cara-frontal {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.cara-trasera {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  transform: rotateY(180deg);
+}
+
+.numero-dato {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cara-trasera h4 { color: var(--verde); }
+.cara-trasera p { color: #333; }
+
+.seccion-hero a[mat-raised-button] {
+  background: white !important;
+  color: var(--verde) !important;
+}
+
+.cara-frontal.mat-mdc-card,
+.cara-trasera.mat-mdc-card {
+  box-shadow: none;
+}
+
+.seccion-audiencia { background-color: var(--crema); }
+
+.tarjeta-audiencia { border-top: 5px solid var(--verde-claro); }
+.titulo-audiencia, .titulo-seccion { color: var(--verde); font-weight: 600; }
+
+.seccion-faq { background: white; }
+.faq-lista details {
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.faq-lista summary {
+  padding: 1rem 1.25rem;
+  background: var(--crema);
+  color: var(--verde);
+  font-weight: 600;
+  cursor: pointer;
+}
+.faq-lista details[open] summary {
+  background: var(--verde-claro);
+  color: white;
+}
+.faq-resposta {
+  padding: 1.25rem;
+  background: #fafafa;
+  margin: 0;
+  line-height: 1.7;
+}

@@ -1,0 +1,32 @@
+<header class="main-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo-section">
+        <h1 class="logo-title">ClimaBCN</h1>
+        <p class="logo-subtitle">Aprèn i Actua</p>
+      </div>
+      <nav class="main-nav">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inici</a>
+        <a routerLink="/aprendre" routerLinkActive="active">Aprèn</a>
+        <a routerLink="/contaminacio" routerLinkActive="active">Contaminació</a>
+        <a routerLink="/recursos" routerLinkActive="active">Recursos</a>
+        <a routerLink="/sobre" routerLinkActive="active">Sobre</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p>&copy; 2024 ClimaBCN — Aprèn i Actua</p>
+      <p>Plataforma educativa per al canvi climàtic a Barcelona</p>
+      <div class="footer-links">
+        <a routerLink="/sobre">Sobre el projecte</a>
+        <a routerLink="/recursos">Recursos</a>
+      </div>
+    </div>
+  </div>
+</footer>

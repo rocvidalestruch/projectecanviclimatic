@@ -1,0 +1,81 @@
+<section class="seccion-hero py-5">
+  <div class="container">
+    <div class="row center g-4">
+      <div class="col-6">
+        <p class="fs-4 fw-500 mb-3">El futur del planeta està a les nostres mans</p>
+        <p class="lead mb-4">
+          El canvi climàtic és el repte definitiu de la nostra generació. Cada dècima de grau compte, 
+          cada acció importa, i cada persona té el poder de fer la diferència. ClimaBCN és una 
+          plataforma educativa dissenyada per transformar la consciència en acció.
+        </p>
+        <p class="mb-4">
+          Aquí trobaràs contingut multimèdia rigorós, activitats interactives i projectes 
+          col·laboratius que connecten l'aprenentatge amb l'impacte real.
+        </p>
+        <div class="d-flex g-2 flex-wrap">
+          <a mat-raised-button color="primary" routerLink="/recursos">Explora Recursos</a>
+          <a mat-raised-button color="primary" routerLink="/contaminacio">Nivells Contaminació</a>
+        </div>
+      </div>
+      <div class="col-6 text-center">
+        <img src="/img/home.jpg" alt="Paisatge urbà de Barcelona amb zones verdes i sostenibilitat" class="img-fluid rounded">
+        <p class="small opacity-90 mt-2 mb-0">Barcelona vista des d'un dels seus espais verds, reflex del compromís amb la sostenibilitat i la lluita contra el canvi climàtic.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+<section class="seccion-estadisticas py-5">
+  <div class="container">
+    <h2 class="text-center text-white fw-bold mb-5 display-5">{{ 'El repte en xifres' | maiuscules }}</h2> 
+    <div class="row g-4">
+      <div class="col-3" *ngFor="let x of xifres; let i = index">
+        <div class="tarjeta-volteable" [class.volteada]="cartaVoltada(i)" (click)="voltarCarta(i)">
+          <div class="tarjeta-interior text-center">
+            <mat-card class="cara-frontal position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center p-4">
+              <span class="numero-dato d-block mb-2">{{ x.xifra }}</span>
+              <span class="opacity-90">{{ x.textCurt }}</span>
+            </mat-card>
+            <mat-card class="cara-trasera position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center p-4">
+              <h4 class="mb-3">{{ x.titol }}</h4>
+              <p class="small mb-0">{{ x.explicacio }}</p>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-white mt-4 small opacity-90">
+      Fes clic per veure més informació
+    </p>
+  </div>
+</section>
+<section class="seccion-audiencia py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-5 display-5 titulo-seccion">Per a qui és la web?</h2>
+    <div class="row g-4">
+      <div class="col-4" *ngFor="let t of targetes">
+        <mat-card class="tarjeta-audiencia h-100">
+          <mat-card-content class="text-center p-4">
+            <h3 class="titulo-audiencia mb-3">{{ t.titol | capitalitzar }}</h3>
+            <p class="mb-0">{{ t.text }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="seccion-faq py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-5 display-5 titulo-seccion">Preguntes Freqüents</h2>
+    <div class="row justify-center">
+      <div class="col-10">
+        <div class="faq-lista">
+          <details *ngFor="let p of preguntesFrequents; let i = index" [attr.open]="i === 0 ? '' : null">
+            <summary>{{ p.pregunta }}</summary>
+            <p class="faq-resposta">{{ p.resposta }}</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
