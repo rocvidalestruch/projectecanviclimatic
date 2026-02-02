@@ -42,3 +42,46 @@ body {background-color: #5D8E3B !important;}
   display: inline-block;
   font-weight: bold; 
 }
+.botó-verd-calculadora {
+    background-color: #5D8E3B !important; /* El teu color verd corporatiu */
+    border-color: #5D8E3B !important;
+    color: white !important;
+    padding: 12px 30px !important;
+    border-radius: 50px !important; /* Estil càpsula */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.botó-verd-calculadora:hover {
+    background-color: #4a722f !important; /* Verd més fosc en passar el ratolí */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+/* Estil general per a totes les cartes del projecte */
+.audience-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+/* El botó verd que utilitzem a tota la secció d'Aprèn */
+.botó-verd-calculadora {
+    background-color: #5D8E3B !important;
+    border-color: #5D8E3B !important;
+    color: white !important;
+    padding: 12px 30px !important;
+    border-radius: 50px !important;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botó-verd-calculadora:hover {
+    background-color: #4a722f !important;
+    transform: scale(1.05);
+}
