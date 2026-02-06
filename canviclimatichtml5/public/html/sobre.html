@@ -116,6 +116,24 @@
     </div>
   </main>
 
+  <!-- API 2: Geolocation -->
+  <section class="container mb-5">
+    <div class="p-4 bg-white rounded shadow-sm">
+      <h3 class="mb-2">Punts verds a prop teu</h3>
+      <p class="text-muted mb-3">Prem el botó per obtenir la teva ubicació i veure quins punts (exemple) tens més a prop.</p>
+
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button id="btnUbicacio" class="btn btn-success">Obtenir ubicació</button>
+        <button id="btnStopWatch" class="btn btn-outline-danger" style="display:none;">Aturar watchPosition</button>
+      </div>
+
+      <p id="txtUbicacio" class="mb-3">Encara no s'ha demanat la ubicació.</p>
+      <ul id="llistaPunts" class="list-group"></ul>
+    </div>
+  </section>
+
+  <script src="../../src/js/geolocalitzacio.js" defer></script>
+
 </body>
 
 </html>
